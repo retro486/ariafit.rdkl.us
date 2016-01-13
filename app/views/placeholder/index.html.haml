@@ -1,0 +1,57 @@
+.container
+  .row
+    .col-md-12
+      %h1 FitAria Sync
+
+      :markdown
+        This app will sync your weight only (more data may come in the future, and may include syncing from Fit to FitBit). It will store an entered email address as well as temporary authorizations from Google and FitBit but nothing else is stored on this server.
+
+
+  #step1.row
+    .col-md-12
+      %h2 Step 1 - Enter your Email Address
+      %input#email.form-control{type: 'text', name: 'email', placeholder: 'E-mail'}
+      %button.btn.btn-primary
+        Next
+        %i.glyphicon.glyphicon-chevron-right
+
+  #step2.row.hide
+    .col-md-12
+      %h2 Step 2 - Authorize Google
+
+      #google-btn
+        #my-signin2
+      #google-wait.hide
+        = image_tag 'ajax_spinner.gif', class: 'img-responsive'
+      #google-error.hide
+        .alert.alert-danger
+      #google-done.hide
+        %button.btn.btn-primary
+          Next
+          %i.glyphicon.glyphicon-chevron-right
+
+  #step3.row.hide
+    .col-md-12
+      %h2 Step 3 - Authorize FitBit
+
+      #fitbit-btn
+        = link_to '#', target: '_blank' do
+          = image_tag 'fitbit_auth_button.png'
+      #fitbit-wait.hide
+        = image_tag 'ajax_spinner.gif', class: 'img-responsive'
+      #fitbit-error.hide
+        .alert.alert-danger
+      #fitbit-done.hide
+        %button.btn.btn-primary
+          %i.glyphicon.glyphicon-ok-circle
+          Start Syncing
+
+        :markdown
+          _Sync will occur once a day, every day, at midnight. It will not automatically trigger when data changes and will only use what data is available exactly at midnight, every day._
+
+          If sync should fail (for example when your authorization expires after 30 days) you will receive a single email notification allowing you to return here and re-authenticate Google and FitBit to resume sync.
+
+%script{src: "https://apis.google.com/js/platform.js?onload=renderGoogleButton", async: true, defer: true}
+
+:javascript
+  $(Sync.init);

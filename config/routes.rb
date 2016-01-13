@@ -53,4 +53,9 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  get '/tos', to: 'placeholder#tos'
+  get '/privacy', to: 'placeholder#privacy'
+
+  root to: 'placeholder#index'
 end
