@@ -2,8 +2,12 @@ class UsersController < ApplicationController
   ALLOWED_PARAMS = [:email]
 
   def create
-    @user = User.new user_params
-    success = @user.save
+    @user = User.where(user_params).first_or_initialize
+    if @user.new_record?
+      success = @user.save
+    else
+      success = true
+    end
 
     respond_to do |format|
       format.html do

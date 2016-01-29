@@ -10,8 +10,11 @@
   #step1.row{class: (@current_step == 1 ? '' : 'hide')}
     .col-md-12
       %h2 Step 1 - Enter your Email Address
+      %p This is just to remember your account by. It doesn't have to match your Google or Fitbit account email addresses.
+
       = simple_form_for @user do |f|
-        = f.input :email, input_html: {class: 'form-control', placeholder: 'E-mail'}
+        .form-group
+          = f.input :email, label: false, input_html: {class: 'form-control', placeholder: 'E-mail'}
 
         %button.btn.btn-primary{type: 'submit'}
           Next
